@@ -1,0 +1,1 @@
+notebooklm-py[browser]==0.8.6
