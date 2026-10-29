@@ -1,0 +1,6 @@
+# Token do Canvas: nunca vai para o repositório.
+canvas.env
+
+# Executável compilado e PDFs descarregados localmente
+canvas_pdfs
+Faculdade/
