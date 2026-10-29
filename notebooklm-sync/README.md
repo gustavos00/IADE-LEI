@@ -66,3 +66,32 @@ cd ../canvas-pdfs && docker run --rm --env-file canvas.env -v ~/Faculdade:/dados
 ```bash
 cd ../notebooklm-sync && .venv/bin/python sync_notebooks.py
 ```
+
+## Podcasts por módulo
+
+O `generate_podcasts.py` gera, no caderno de cada disciplina, um áudio por módulo, feito só com as fontes desse módulo, incluindo os Recursos da Aula Virtual. Depois descarrega-o para `~/Faculdade/<disciplina>/<módulo>/Podcast · <módulo>.m4a`.
+
+- **Estilo:** um só apresentador, em português de Portugal, a explicar com calma o como e o porquê de cada conceito. A primeira frase já é matéria, e os exemplos vêm só da matéria, sem analogias com jogos ou com o dia a dia. As instruções estão em `build_instructions()`.
+- **Áudio:** depois de descarregar, o script abranda o áudio para 0,85x (`PLAYBACK_SPEED`), sem mudar o tom da voz, e normaliza o volume para -16 LUFS, o volume habitual de podcast. Para isso usa o ffmpeg incluído no pacote `imageio-ffmpeg`, por isso não é preciso instalar nada.
+- **Ordem:** os módulos são intercalados entre as disciplinas: o módulo 01 de cada uma, depois o módulo 02 de cada uma, e assim por diante. Por omissão, trata Álgebra Linear, Análise Matemática, Física e Sistemas Digitais. Os Fundamentos da Programação são um lote à parte.
+- **Quota:** cada podcast gasta uma boa parte da quota de 5 horas do Gemini Notebook. O script gera enquanto houver quota, para quando ela acaba e, na vez seguinte, continua onde ficou. Os pedidos já feitos ficam em `.podcasts-pendentes.json`, para nenhum ser pago duas vezes.
+
+```bash
+.venv/bin/python generate_podcasts.py --listar
+```
+```bash
+.venv/bin/python generate_podcasts.py --max 1
+```
+```bash
+.venv/bin/python generate_podcasts.py --disciplina "Fundamentos da Programação"
+```
+
+| Opção | O que faz |
+|---|---|
+| `--listar` | Mostra a ordem e o que falta gerar, sem gerar nada |
+| `--max N` | Trata no máximo N podcasts nesta volta |
+| `--disciplina NOME` | Trata só esta disciplina. Pode repetir-se, e a ordem dada é a ordem usada |
+| `--refazer TEXTO` | Volta a gerar os módulos cujo nome contém o texto. A versão anterior fica como "(versão anterior)" |
+| `--pasta PASTA` | Onde guardar os áudios. Por omissão é `~/Faculdade` |
+
+**Limitação conhecida:** no formato de um só apresentador, o NotebookLM gera sempre um áudio curto, de 1 a 2 minutos, e ignora o pedido de duração longa.

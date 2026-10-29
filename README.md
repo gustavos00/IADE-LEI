@@ -9,4 +9,5 @@ Cada ferramenta tem a sua pasta e o seu próprio README, com instruções de ins
 | Pasta | Para que serve |
 |---|---|
 | [`canvas-pdfs/`](canvas-pdfs/) | Descarrega do Canvas ([mycampus.pt](https://www.mycampus.pt)) os PDFs das disciplinas do semestre e organiza-os em `Faculdade/<disciplina>/<módulo>/`, com nomes de pastas e de ficheiros normalizados. Corre em Docker ou como executável C++. |
-| [`notebooklm-sync/`](notebooklm-sync/) | Envia esses PDFs para o Gemini Notebook (antigo NotebookLM), com um caderno por disciplina. Cada fonte tem como título o módulo de onde vem, e o script só envia o que ainda lá não está. Usa uma biblioteca não oficial. |
+| [`notebooklm-sync/`](notebooklm-sync/) | Envia esses PDFs para o Gemini Notebook (antigo NotebookLM), com um caderno por disciplina. Cada fonte tem como título o módulo de onde vem, e o script só envia o que ainda lá não está. Também gera um podcast por módulo (`generate_podcasts.py`). Usa uma biblioteca não oficial. |
+| [`resumos-pdf/`](resumos-pdf/) | Converte em PDF os resumos em Markdown das pastas `Resumidos` de cada módulo. |

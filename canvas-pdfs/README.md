@@ -6,9 +6,11 @@ Descarrega do Canvas do IADE ([mycampus.pt](https://www.mycampus.pt)) os PDFs da
 Faculdade/
   Álgebra Linear/
     01 - Vetores e Matrizes/
-      LEI.34.01.01.IADE.PT.pdf
+      Originais/
+        LEI.34.01.01.IADE.PT.pdf
       Recursos da Aula Virtual/
         1 - Introdução aos vetores.pdf
+      Resumidos/              (resumos de cada PDF; não vêm do Canvas)
     02 - Sistemas de Equações Lineares/
     …
   Análise Matemática/
@@ -24,7 +26,7 @@ Pode correr-se tantas vezes quantas quiseres: só descarrega o que ainda não te
 - Usa a **API oficial do Canvas**, a mesma que a aplicação móvel usa, com um token pessoal. Não precisa da tua password e não lê as páginas web.
 - Só descarrega as disciplinas definidas em `SUBJECTS`, no início de [`canvas_pdfs.cpp`](canvas_pdfs.cpp). Para encontrar cada disciplina, compara o nome do Canvas sem acentos e sem distinguir maiúsculas de minúsculas. As outras áreas do Canvas ficam de fora, como a Biblioteca, as Comunidades ou o Respondus.
 - Organiza os ficheiros pelos **módulos** de cada disciplina:
-  - `1. VETORES E MATRIZES` passa a `01 - Vetores e Matrizes`;
+  - `1. VETORES E MATRIZES` passa a `01 - Vetores e Matrizes`, com os PDFs do módulo em `Originais/`;
   - `N. Recursos da Aula Virtual` vai para dentro do módulo `N`;
   - os PDFs que não estão em nenhum módulo vão para `Outros ficheiros`.
 - Limpa os nomes dos ficheiros: `1_Introdução (1).pdf.pdf` passa a `1 - Introdução.pdf`. Os códigos `LEI.xx.xx.xx.IADE.PT.pdf` ficam como estão.

@@ -22,15 +22,25 @@ NOTEBOOK_PREFIX = "IADE LEI · "
 TITLE_SEPARATOR = " › "
 
 
+# A pasta Originais não entra no título: as fontes já enviadas foram-no antes de ela existir.
+ORIGINALS_FOLDER = "Originais"
+# Os resumos são escritos a partir das fontes; enviá-los repetiria a mesma matéria.
+SUMMARIES_FOLDER = "Resumidos"
+
+
 def build_source_title(subject_dir, pdf_path):
-    """'01 - Vetores e Matrizes/Recursos da Aula Virtual/1 - Intro.pdf' -> '01 - Vetores e Matrizes › Recursos da Aula Virtual › 1 - Intro'"""
+    """'01 - Vetores e Matrizes/Originais/LEI.34.01.01.pdf' -> '01 - Vetores e Matrizes › LEI.34.01.01'"""
     parts = pdf_path.relative_to(subject_dir).with_suffix("").parts
 
-    return TITLE_SEPARATOR.join(parts)
+    return TITLE_SEPARATOR.join(part for part in parts if part != ORIGINALS_FOLDER)
 
 
 def list_subject_pdfs(subject_dir):
-    pdfs = sorted(path for path in subject_dir.rglob("*.pdf") if path.is_file())
+    pdfs = sorted(
+        path
+        for path in subject_dir.rglob("*.pdf")
+        if path.is_file() and SUMMARIES_FOLDER not in path.relative_to(subject_dir).parts
+    )
 
     return [(build_source_title(subject_dir, path), path) for path in pdfs]
 

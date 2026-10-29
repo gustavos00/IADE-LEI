@@ -15,8 +15,8 @@
 //   --listar          mostra o que descarregaria, sem descarregar
 //
 // Só descarrega as disciplinas em SUBJECTS, para <saida>/<disciplina>/<módulo>/<ficheiro>.pdf.
-// Os módulos ficam "01 - Vetores e Matrizes"; os "N. Recursos da Aula Virtual" vão para dentro do
-// módulo N. PDFs da área Ficheiros que não estão em nenhum módulo vão para <disciplina>/Outros ficheiros.
+// Os módulos ficam "01 - Vetores e Matrizes", com os PDFs do módulo em Originais/; os
+// "N. Recursos da Aula Virtual" vão para dentro do módulo N. PDFs da área Ficheiros que não estão em nenhum módulo vão para <disciplina>/Outros ficheiros.
 // Ficheiros já descarregados (mesmo tamanho) são saltados, por isso podes voltar a correr.
 
 #include <curl/curl.h>
@@ -479,6 +479,8 @@ const Subject SUBJECTS[] = {
 
 const char* const UNSORTED_FOLDER = "Outros ficheiros";
 const char* const RESOURCES_FOLDER = "Recursos da Aula Virtual";
+// Os PDFs do próprio módulo; ao lado ficam os Recursos da Aula Virtual e os Resumidos.
+const char* const ORIGINALS_FOLDER = "Originais";
 
 struct PdfEntry {
     std::string module;
@@ -655,7 +657,7 @@ std::string buildModuleFolder(const ModuleName& module, const std::vector<Module
     std::string prefix = formatModuleNumber(module.number) + " - ";
 
     if (!isResourcesModule(module)) {
-        return makeSafeName(prefix + module.title);
+        return makeSafeName(prefix + module.title) + "/" + ORIGINALS_FOLDER;
     }
 
     for (const ModuleName& other : allModules) {

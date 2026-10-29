@@ -1,1 +1,2 @@
 notebooklm-py[browser]==0.8.6
+imageio-ffmpeg==0.7.0
